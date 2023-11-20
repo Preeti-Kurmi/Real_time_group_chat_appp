@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    div {
+        max-width: 307px;
+    margin: 172px 75px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    input {
+        width: 100%;
+    padding: 15px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    }
+    .btn{
+        color: #17181a;
+    margin-left: 84px;
+    padding: 1px 27px;
+    border-radius: 29px;
+    background-color: blue;
+    }
+
+   .btn:hover{
+    background-color: #fff;
+   }
+
+    input:hover {
+        background-color: #e8d9e3;
+    }
+    h3{
+        margin-left: 10px;
+    }
+    
+</style>
+<body>
+    <div><h3>Singup</h3>
+        <table>
+            <tr>
+                
+                <td><input type="text" name="" id="name" placeholder="Enter your name"></td>
+            </tr>
+            <tr>
+               
+                <td><input type="email" name="" id="email" placeholder="Enter your email address"></td>
+            </tr>
+            <tr>
+                
+                <td><input type="number" name="" id="phoneno" placeholder="Enter your mobile no"></td>
+            </tr>
+            <tr>
+                
+                <td><input type="text" name="" id="password" placeholder="Enter your password"></td>
+            </tr>
+            <tr>
+                <td><button class="btn" id="signupbtn" onclick="save()"><h4>Singup</h4></button></td>
+              
+            </tr>
+            
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+    <script src="signup.js"></script>
+</body>
+</html>
