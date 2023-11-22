@@ -1,7 +1,9 @@
 const { error } = require('console');
 const signupmodel=require('../modal/signupmodal');
 const bcrypt=require('bcrypt')
-
+const jwt=require('jsonwebtoken');
+const secretekey='dsfhsjdfsdkjfskfjskfjsk';
+require('dotenv').config();
 
 const signup=async(req,res)=>{
     
@@ -40,17 +42,26 @@ const signup=async(req,res)=>{
     }
 
 }
+function gettoken(id){
+    const token=jwt.sign({userid:id},secretekey);
+    console.log(token);
+    return token;
+
+}
+
 const login=async(req,res)=>{
     try{
         const password=req.body.password;
     const log=await signupmodel.findOne({where:{email:req.body.email}});
+    
     if(log){
         bcrypt.compare(password,log.password,(err,response)=>{
             if(err){
                 return res.status(200).json("somehting went wrong");
             }
             else if(response){
-                return res.status(200).json('Login Successfully');
+                return res.status(200).json({message:'Login Successfully',token:gettoken(log.id)});
+
             }
             else{
                 return res.status(200).json("You entered wrong password");
