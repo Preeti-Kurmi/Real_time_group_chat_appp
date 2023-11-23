@@ -22,3 +22,6 @@ const entry={name,email,phoneno,password};
    console.log(err);
     })
 }
+function redirect(){
+    window.location.href="./login.html"
+}
