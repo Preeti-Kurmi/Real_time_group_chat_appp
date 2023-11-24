@@ -1,6 +1,6 @@
 const token=localStorage.getItem('token');
 const leftdiv=document.getElementById('leftdiv');
-
+const MESSAGE_STORAGE_KEY = 'messages';
 function sendMessage() {
     const messageInput = document.getElementById('message-input');
     const message = messageInput.value;
@@ -23,12 +23,22 @@ function sendMessage() {
     }
         }
 function fetchdata(){
+    const storedMessages = JSON.parse(localStorage.getItem(MESSAGE_STORAGE_KEY)) || [];
     axios.get('http://localhost:8000/getmessage',{headers:{"Authorization":token}})
     .then((res)=>{
        // Display(res.data)
-       Display(res.data.message,res.data.name);
-       console.log("res",res.data.message);
+       //Display(res.data.message);
+       const newMessages = res.data.message;
+       console.log("res",res.data.message.message);
        console.log("name",res.data.name);
+       //chatgpt
+       const filteredMessages = newMessages.filter((message) => !storedMessages.includes(message));
+            Display(filteredMessages);
+
+            // Update local storage with all messages
+            const allMessages = [...storedMessages, ...newMessages];
+            localStorage.setItem(MESSAGE_STORAGE_KEY, JSON.stringify(allMessages));
+       
 }
 
 
@@ -37,7 +47,7 @@ function fetchdata(){
     )
     .catch((err)=>{
    console.log(err);
-   alert(err);
+   
     })
 }
 
