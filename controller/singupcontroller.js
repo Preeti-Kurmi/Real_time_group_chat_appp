@@ -60,7 +60,7 @@ const login=async(req,res)=>{
                 return res.status(200).json("somehting went wrong");
             }
             else if(response){
-                return res.status(200).json({message:'Login Successfully',token:gettoken(log.id)});
+                return res.status(200).json({message:'Login Successfully',token:gettoken(log.id),userid:req.userid});
 
             }
             else{
@@ -78,4 +78,6 @@ catch(err){
     console.log(err);
 }
 }
+
+
 module.exports={signup,login};
