@@ -22,6 +22,25 @@ const entry={name,email,phoneno,password};
    console.log(err);
     })
 }
+axios.get('http://localhost:8000/signinfo')
+    .then((res)=>{
+        console.log(res.data);
+        if(res.data.errors){
+            alert(res.data.errors);
+
+        }
+        else if(res.data.message){
+            alert(res.data.message);
+
+        }
+        console.log(res.data);
+       
+
+    })
+    .catch((err)=>{
+   console.log(err);
+    })
+
 function redirect(){
     window.location.href="./login.html"
 }

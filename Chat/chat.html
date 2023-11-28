@@ -13,16 +13,19 @@
 }
 
 .chat-container {
-    max-width: 600px;
+    max-width: 1510px;
     margin: 20px auto;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: antiquewhite;
+    background-color:#fff;
+    height: 722px;
+
 }
 
 .chat-header {
+ 
     background-color: #0bdc1d;
     color: #fff;
     padding: 10px;
@@ -41,7 +44,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    margin-top: 103px;
+    margin-top: -308px;
+    width: 204px;
+
 }
 
 input[type="text"] {
@@ -52,14 +57,7 @@ input[type="text"] {
     margin-right: 8px;
 }
 
-button {
-    padding: 8px 16px;
-    background-color: #34db55;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+
 .chat-messages{
     color: #34db55;
 }
@@ -72,49 +70,222 @@ button {
     border-radius: 28px;
     background: #fff;
 }
-/* .right{
-    float: right;
-    border: 2px solid black;
-    margin-right: 49px;
-    padding: 10px;
-    border-radius: 28px;
-    background: #fff;
-} */
+.right{
+    
+    margin-bottom: 3px;
+    height: 133px;
+    /* background: #fff; */
+    position: relative;
+    top: 511px;
+}
 .chat-header h2{
     margin-bottom: 3px;
     position: relative;
-    bottom: 32px;
+    bottom: 51px;
 }
 .newmessage{
     
-    border: 2px solid black;
+    border: 2px solid #fff;
     padding: 10px;
     border-radius: 28px;
     background: #fff;
-    margin: 26px;
+    margin: 16px;
     width: 150px;
-
+    position: relative;
+    bottom: 510px;
 }
 span{
     font-size: 10px;
 }
+.menubtn{
+    position: absolute;
+    left: 1182px;
+    top: 127px;
+
+}
+.displaygroupclass{
+    color: #222722;
+    /* border: 4px solid; */
+    padding-left: 85px;
+    border-radius: 10px;
+    font-family: math;
+    font-size: 23px;
+    border-bottom: 1px dotted;
+    border-bottom: 2px solid whitesmoke;
+}
+
+.group{
+    width: 250px;
+    
+    margin-left: 748px;
+   
+    /* height: 494px; */
+    position: relative;
+    height: 500px;
+    background-color: white;
+    border-radius: 10px;
+    padding-left: 11px;
+    padding-top: 10px;
+}
+
+.inputcorrect{
+   
+    position: relative;
+    top: 546px;
+    left: 20px;
+}
+    
+
+
+.newgroupchat{
+    color: white;
+    border: 2px solid black;
+    padding: 15px;
+    background-color: #1a431a;
+    text-align: center;
+    font-size: 23px;
+    font-family: cursive;
+
+}
+.userdiv{
+    
+    background-color: whitesmoke;
+    height: 83%;
+    width: 46%;
+    position: relative;
+    left: -24px;
+    border-left: 2px solid black;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    overflow:scroll;
+
+}
+.chatdiv{
+    background-color: #FFF8E1;
+    height: 83%;
+    width: 75%;
+    position: relative;
+    left: -25px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+}
+.userchatdiv{
+    display: flex;
+    height: 700px;
+    background-color: whitesmoke#222722;
+
+}
+.messagesendinput{
+    width: 416px;
+    position: relative;
+    left: 66px;
+
+}
+.sendbtn{
+    position: absolute;
+    right: 114px;
+    padding: 7px;
+    background-color: forestgreen;
+    border-radius: 10px;
+}
+.creategroupbtn {
+    /* padding: 4px;
+    margin-left: 139px;
+    padding: 6px;
+    margin-top: 468px; */
+    border-radius: 30px;
+    background-color: forestgreen;
+    padding: 10px;
+  
+   
+
+}
+.btndiv{
+    margin-top: -221px;
+    margin-left: 284px;
+    position: fixed;
+    bottom: 541px;
+   
+}
+
+        
+   
+body {
+    overflow-x: hidden; /* Hide horizontal scroll bar */
+    overflow-y: hidden; /* Hide vertical scroll bar */
+}
+.imggroup{
+    width: 38px;
+    margin-left: -179px;
+    margin-bottom: -13px;
+    border-radius: -18px;}
 </style>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
+    <div class="chat-container" id="chatcontainer">
+        <div class="chat-header" id="chathead">
             <img src="../logo.png" alt="" width="100px">
+
+           
+            
             <h2>Chat App</h2>
+          
+
+           
         </div>
+        
+        <div class="userchatdiv">
+            
+
+        <div class="userdiv" id="addgroup">
+         
+            <div class="useradd" id ="useradded"></div>
+
+           <div class="btndiv"><button class="creategroupbtn" onclick="group()">Create Group</button></div>  
+
+          
+           
+     <!-- <button class="creategroupbtn" onclick="group()">Create Group</button> -->
+
+        </div>
+        <div class="chatdiv">
+            <div class="headerchat" id="chatid"></div>
+            <div  id="rightdiv" class="right">hi </div>
+            <!-- socket -->
+            <!-- <div class="container">
+                <div class="message right"></div>
+                <div class="message left"></div>
+            </div>
+          
+            </div> -->
+            <div class="inputcorrect" >
+            <input type="text" id="message-input" class="messagesendinput" placeholder="Type your message">
+            <button onclick="sendMessage()"  class="sendbtn">Send</button></div></div></div>
+<!-- 
         <div class="chat-messages" id="chat-messages">
-            <!-- Messages will be added here dynamically -->
+          
         </div>
-        <!-- <div class="left" id="leftdiv">hi i am in left</div> -->
-        <div class="right" id="rightdiv"> </div>
-        <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Type your message">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+        
+        
+        
+            <div class="Creategrpbtn">
+            <button class="menubtn" onclick="group()">Create</button></div>
+            
+                <div class="chat-input">
+           
+
+        
+
+        </div> -->
     </div>
+   
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script> -->
+  <script
+  src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+  
+></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
 
     <script src="chat.js"></script>
