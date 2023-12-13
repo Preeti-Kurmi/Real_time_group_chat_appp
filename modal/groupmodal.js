@@ -12,12 +12,7 @@ const group = mysql.define('group',{
         
     },
     
-    
-   isAdmin:{
-    type:Sequelize.BOOLEAN,
-
-
-   },
+  
    userid:{
     type:Sequelize.INTEGER,
    },

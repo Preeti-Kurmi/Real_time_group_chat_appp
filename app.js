@@ -6,8 +6,17 @@ const routes=require('./routes/routes')
 const mysql=require('./util/database');
 const server = require("http").createServer(app);
 const path=require('path');
+const User=require('./modal/signupmodal');
+const Group =require('./modal/groupmodal');
+const Message=require('./modal/messagemodel');
+const Usergroup=require('./modal/usergroup')
+const { message } = require('./controller/messagecontroller');
 
- const io=require('socket.io')(server);
+ const io=require('socket.io')(server,{
+  cors:{
+    origin:'*'
+  }
+ });
 
 require('dotenv').config();
 
@@ -19,52 +28,39 @@ app.use(cors());
 app.use('/',routes);
 // app.use(express.static(path.join(__dirname, 'Frontend')));
 
-const users = [];
-  io.on("connection", (socket) => {
+
+  io.on('connection', socket => {
     console.log("connected");
-    socket.on("user-joined", (usertoken) => {
-      const user = jwt.decode(usertoken);
-      users[socket.id] = user;                                      
-      socket.broadcast.emit("user-joined-broadcast", user);
+    socket.on('send-message',message=>{
+      console.log("message from socket",message);
+      socket.broadcast.emit("received",message)
+    })
+    socket.on('user-joined', name => {
+      console.log("new user",name)
+                                     
+      socket.broadcast.emit('user-joined-now', name);
   
     });
   
-    // send-message event and recieve-message broadcast
-    socket.on("send-message", (message) => {
-      const user = jwt.decode(message.token);
-      const userb = users[socket.id];
-      const data =  { user: user.name, message: message.message }
-      socket.broadcast.emit("receive-message", data);
-    });
+    // // send-message event and recieve-message broadcast
+    // socket.on('send', (message) => {
+      
+    //   socket.broadcast.emit('receive', {message:message,name:users[socket.id]});
+    // });
   
-// user-left event & broadcast it executes automatically when user log out or close the tab, inbuilt socket.io feature
-    socket.on("disconnect", () => {
-      const user = users[socket.id];
-      delete users[socket.id];
-      socket.broadcast.emit("user-left", user.name);
-    });
-  });
-// io.on('connection', (socket) => {
-//   console.log('User connected');
+})
+  // )
+  
+User.hasMany(Message)
+Message.belongsTo(User, { foreignKey: 'userId' });
 
-//   // Listen for the 'send-message' event from the client
-//   socket.on('new user joined', name => {
-//     users[socket.id]=name;
-    
-//      socket.broadcast.emit('user-joined',name)
-//   });
-// });
-//   // Add other Socket.IO event handlers as needed...
-
-//   // Listen for the 'disconnect' event
-// //   socket.on('disconnect', () => {
-// //       console.log('User disconnected');
-// //   });
-// // });
+//  Group.belongsToMany(User, {through: Usergroup ,foreignKey: 'groupId' });
+// User.belongsToMany(Group, {through: Usergroup , foreignKey: 'userId' });
+Group.belongsToMany(User, {through: Usergroup});
+User.belongsToMany(Group, {through: Usergroup});
 
 
-
-mysql.sync({ force: false})
+mysql.sync({ force:false})
   .then((res) => {
     console.log(res.data);
     server.listen(port, () => {
@@ -73,4 +69,5 @@ mysql.sync({ force: false})
   })
   .catch((err) => {
     console.log(err);
+
   });

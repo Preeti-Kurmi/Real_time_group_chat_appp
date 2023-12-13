@@ -14,10 +14,12 @@ const Message = mysql.define('message',{
     message:{
         type:Sequelize.STRING,
     },
-   userid:{
-    type:Sequelize.INTEGER,
+    name:{
+        type:Sequelize.STRING,
+    },
+  
 
-   },
+  
 })
 
 
